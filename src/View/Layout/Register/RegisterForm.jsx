@@ -1,15 +1,13 @@
 import Button from "../../Components/Button"
 import InputForm from "../../Components/InputForm";
-import {Link} from "react-router-dom"
-import {userLogin} from "../../../Context/AuthContext"
+import {userRegister} from "../../../Context/AuthContext"
 import {useError} from "../../../Hooks/useError"
 import {useState} from "react";
 
 function LoginForm(){
     const [emailText, setEmailText] = useState("");
     const [password, setPassword] = useState("");
-    const [isClickable, setIsClickable] = useState(false);
-    const [showInput, setShowInput] = useState(false);
+    const [confirmPassword, setConfirmPassword] = useState("");
     const {error, showError} = useError();
 
     const handleChange = (event) =>{
@@ -23,52 +21,46 @@ function LoginForm(){
         setIsClickable(validation.test(email));
     }
 
-    const handleNextInput = (event) =>{
-        console.log(import.meta.env.VITE_FIREBASE_API_KEY)
-        event.preventDefault();
-        setShowInput(true);
-    }
-
-    async function handleLogin(e){
+    async function handleRegister(e){
         e.preventDefault();
         showError("");
-        const response = await userLogin(emailText, password);
+
+        if(password !== confirmPassword){
+            showError("passwords doesn't match")
+            return;
+        }
+
+        const response = await userRegister(emailText, password);
 
         if(response.error){
             showError(response.error)
             return;
         }
 
-        alert("Login efetuado");
+        alert("Conta registrada");
     }
 
     return(
         <div className={`m-auto bg-white w-[420px] h-fit rounded-sm shadow`}>
             <div className="h-full p-12">
                 <div className="flex flex-col h-full p-1">
-                    <div className="mx-auto mb-6">
+                    <div className="mx-auto">
                         <img src={"/images/UpwardBullLogo.png"} />
                     </div>
                     <div className="h-full">
                         <form>
+
                             <InputForm name="E-mail" value={emailText} onChange={handleChange} instruction="Type your e-mail"/>
-                            {showInput && (
-                                <InputForm value={password} name="Password" type="password" instruction="Type your password" onChange={(p) => setPassword(p.target.value)}/>
-                            )}
+
+                            <InputForm value={password} name="Password" type="password" instruction="Type your password" onChange={(p) => setPassword(p.target.value)}/>
+
+                            <InputForm value={confirmPassword} name="Confirm Password" type="password" instruction="confirm your password" onChange={(p) => setConfirmPassword(p.target.value)}  />
+
                             {error && <p className="text-error text-sm pb-3">{error}</p>}
                                 <div className="flex gap-6 pt-6npnp">
-                                    {showInput && (
-                                        <>
-                                        <Button action="Back" />
-                                        <Button action="Login" onClick={handleLogin} />
-                                        </>
-                                    )}
-                                    {showInput == false && <Button action="Continue" disabled={!isClickable} onClick={handleNextInput}/>}
+                                    <Button action="Continue" onClick={handleRegister}/>
                                 </div>
                         </form>
-                    </div>
-                    <div className="mx-auto text-black text-[10px] mt-2">
-                        <Link to="/Register">Create Account</Link>
                     </div>
                 </div>
             </div>

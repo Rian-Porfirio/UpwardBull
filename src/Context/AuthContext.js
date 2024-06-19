@@ -1,5 +1,8 @@
 import { auth } from "../Model/Services/Data/FirebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
 export async function userLogin(email, password) {
   let response = new Object();
@@ -11,13 +14,13 @@ export async function userLogin(email, password) {
     })
     .catch((error) => {
       console.log(error);
-      response.error = "Email ou Senha inválidos";
+      response.error = "Invalid Email or Password";
     });
 
   return response;
 }
 
-export async function createAccount() {
+export async function userRegister(email, password) {
   let response = new Object();
 
   await createUserWithEmailAndPassword(auth, email, password)
@@ -27,7 +30,7 @@ export async function createAccount() {
     })
     .catch((error) => {
       console.log(error);
-      response.error = "Criação de conta negada";
+      response.error = "Something went wrong";
     });
 
   return response;
