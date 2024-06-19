@@ -1,4 +1,4 @@
-import logojpg from "../../assets/UpwardBullLogo.png"
+import logojpg from "../../Assets/UpwardBullLogo.png"
 
 function Logo() {
   return (
