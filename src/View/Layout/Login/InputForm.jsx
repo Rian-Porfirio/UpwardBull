@@ -1,4 +1,4 @@
-function InputForm({name = "input", instruction = "type here", type = "text", onChange, value}) {
+export default function InputForm({name = "input", instruction = "type here", type = "text", onChange, value}) {
   return (
     <div className="text-black h-1/2 mb-3">
       <label className="text-[12px] font-semibold">
@@ -8,5 +8,3 @@ function InputForm({name = "input", instruction = "type here", type = "text", on
     </div>
   );
 }
-
-export default InputForm

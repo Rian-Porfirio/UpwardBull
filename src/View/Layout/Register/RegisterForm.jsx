@@ -1,10 +1,11 @@
-import Button from "../../Components/Button"
-import InputForm from "../../Components/InputForm";
-import {userRegister} from "../../../Context/AuthContext"
-import {useError} from "../../../Hooks/useError"
+import {userRegister} from "../../../model/services/auth/AuthService";
+import {useError} from "../../../hooks/useError";
 import {useState} from "react";
+import InputForm from "../login/InputForm";
+import Button from "../../components/Button";
+import {Link} from "react-router-dom";
 
-function LoginForm(){
+export default function LoginForm(){
     const [emailText, setEmailText] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -26,14 +27,14 @@ function LoginForm(){
         showError("");
 
         if(password !== confirmPassword){
-            showError("passwords doesn't match")
+            showError("passwords doesn't match");
             return;
         }
 
         const response = await userRegister(emailText, password);
 
         if(response.error){
-            showError(response.error)
+            showError(response.error);
             return;
         }
 
@@ -62,10 +63,11 @@ function LoginForm(){
                                 </div>
                         </form>
                     </div>
+                    <div className="mx-auto text-black text-xs mt-2">
+                            <Link to="/Login">Sign In</Link>
+                        </div>
                 </div>
             </div>
         </div>
     );
 }
-
-export default LoginForm;

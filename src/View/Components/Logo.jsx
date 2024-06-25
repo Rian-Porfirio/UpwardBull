@@ -1,9 +1,7 @@
-import logojpg from "../../Assets/UpwardBullLogo.png"
+import logopng from "./images/UpwardBullLogo.png";
 
-function Logo() {
+export default function Logo() {
   return (
-        <img className="h-full" src={logojpg} alt="UpwardBull_Logo" />
+        <img className="h-full" src={logopng} alt="UpwardBull_Logo" />
   );
 }
-
-export default Logo

@@ -1,10 +1,8 @@
-import LoginForm from "../Layout/Login/LoginForm";
-function LoginPage(){
+import LoginForm from "../../layout/login/LoginForm";
+export default function LoginPage(){
     return(
         <div className="flex h-screen bg-[#f4f7f9]">
             <LoginForm />
         </div>
     );
 }
-
-export default LoginPage;

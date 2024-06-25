@@ -1,7 +1,8 @@
-import { auth } from "../Model/Services/Data/FirebaseConfig";
+import { auth } from "../../../config/FirebaseConfig";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 export async function userLogin(email, password) {
@@ -34,4 +35,8 @@ export async function userRegister(email, password) {
     });
 
   return response;
+}
+
+export async function userLogOut() {
+  await signOut(auth).then();
 }

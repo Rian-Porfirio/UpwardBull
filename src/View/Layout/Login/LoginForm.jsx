@@ -1,11 +1,11 @@
-import Button from "../../Components/Button"
-import InputForm from "../../Components/InputForm";
-import {Link} from "react-router-dom"
-import {userLogin} from "../../../Context/AuthContext"
-import {useError} from "../../../Hooks/useError"
+import {userLogin} from "../../../model/services/auth/AuthService";
+import {useError} from "../../../hooks/useError";
 import {useState} from "react";
+import InputForm from "./InputForm";
+import Button from "../../components/Button";
+import {Link} from "react-router-dom";
 
-function LoginForm(){
+export default function LoginForm(){
     const [emailText, setEmailText] = useState("");
     const [password, setPassword] = useState("");
     const [isClickable, setIsClickable] = useState(false);
@@ -24,7 +24,7 @@ function LoginForm(){
     }
 
     const handleNextInput = (event) =>{
-        console.log(import.meta.env.VITE_FIREBASE_API_KEY)
+        console.log(import.meta.env.VITE_FIREBASE_API_KEY);
         event.preventDefault();
         setShowInput(true);
     }
@@ -35,7 +35,7 @@ function LoginForm(){
         const response = await userLogin(emailText, password);
 
         if(response.error){
-            showError(response.error)
+            showError(response.error);
             return;
         }
 
@@ -67,7 +67,7 @@ function LoginForm(){
                                 </div>
                         </form>
                     </div>
-                    <div className="mx-auto text-black text-[10px] mt-2">
+                    <div className="mx-auto text-black text-xs mt-2">
                         <Link to="/Register">Create Account</Link>
                     </div>
                 </div>
@@ -75,5 +75,3 @@ function LoginForm(){
         </div>
     );
 }
-
-export default LoginForm;
