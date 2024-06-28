@@ -1,17 +1,20 @@
 import {useState, useEffect} from "react"
 import InputCrud from "../../components/InputCrud"
 
-export default function ProvidersLayout({selectForm = false, addItem, listItem, editItem, product, editing, setEditing}){
+export default function ProvidersLayout({selectForm = false, addItem, listItem, editItem, provider, editing, setEditing}){
+
     const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+    const [country, setCountry] = useState("");
 
     const handleRegister = () =>{
-        if(name && email && phone){
+        if(name && city && state && country){
             addItem({
                 name: name,
-                email: email,
-                phone: phone
+                city: city,
+                state: state,
+                country: country,
             })
             return;
         }
@@ -21,8 +24,9 @@ export default function ProvidersLayout({selectForm = false, addItem, listItem, 
 
     const handleClean = () => {
         setName("")
-        setEmail("")
-        setPhone("")
+        setCity("")
+        setState("")
+        setCountry("")
     }
 
     const handleCancel = () =>{
@@ -31,30 +35,32 @@ export default function ProvidersLayout({selectForm = false, addItem, listItem, 
     }
     
     const handleEdit = () =>{
-        if(!name || !email || !phone){
+        if(!city || !state || !country){
             alert("Action Blocked. Please provide the information below.")
             return;
         }
         editItem({
             name: name,
-            email: email,
-            phone: phone
+            city: city,
+            state: state,
+            country: country,
         })
         handleClean();
         setEditing(false)
     }
 
     const handleInputs = () =>{
-        setName(product.name)
-        setEmail(product.email)
-        setPhone(product.phone)
+        setName(provider.name)
+        setCity(provider.city)
+        setState(provider.state)
+        setCountry(provider.country)
     }
 
     useEffect(()=>{
         if(editing){
             handleInputs()
         }
-    }, [product])
+    }, [provider])
 
     useEffect(() =>{
         listItem()
@@ -64,9 +70,12 @@ export default function ProvidersLayout({selectForm = false, addItem, listItem, 
         <div className="h-fit bg-white rounded-lg p-4 text-black">
                 <div className="h-full">
                     <div className="text-xs flex flex-col gap-2">
-                        <InputCrud name="Name" value={name} change={(n) => setName(n.target.value)} />
-                        <InputCrud name="Email" value={email} change={(e) => setEmail(e.target.value)}/>
-                        <InputCrud name="Phone" value={phone} change={(p) => setPhone(p.target.value)}/>
+                        <div className="grid grid-cols-2 gap-3">
+                            <InputCrud name="Name" value={name} change={(n) => setName(n.target.value)} />
+                            <InputCrud name="City" value={city} change={(c) => setCity(c.target.value)} />
+                            <InputCrud name="State" value={state} change={(s) => setState(s.target.value)}/>
+                            <InputCrud name="Country" value={country} change={(c) => setCountry(c.target.value)}/>
+                        </div>
                         <div className="flex justify-end items-center">
                         {selectForm && (
                                 <div className="w-full">

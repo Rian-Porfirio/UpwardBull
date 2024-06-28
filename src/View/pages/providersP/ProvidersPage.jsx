@@ -5,9 +5,10 @@ import { useState } from "react";
 
 export default function ProvidersPage(){
 
-    const [provider, setProvider] = useState([]);
-    const [isEditing, setIsEditing] = useState(false);
+    const [provider, setProvider] = useState([])
+    const [isEditing, setIsEditing] = useState(false)
     const [editItem, setEditItem] = useState(null)
+    const [contacts, setContacts] = useState([])
 
     async function handleAdd(provider){
         await addProvider(provider)
@@ -34,8 +35,21 @@ export default function ProvidersPage(){
 
     return (
         <div className="bg-neutral-500 w-full p-3 flex flex-col gap-3">
-            <ProvidersLayout addItem={handleAdd} listItem={handleList} editItem={handleEdit} provider={editItem} editing={isEditing} setEditing={setIsEditing}/>
-            <ProvidersDataContainer providers={provider} deleteFunction={handleDelete} editFunction={handleEditProvider}/>
+            <ProvidersLayout
+             addItem={handleAdd} 
+             listItem={handleList} 
+             editItem={handleEdit} 
+             provider={editItem} 
+             editing={isEditing} 
+             setEditing={setIsEditing}
+             />
+             
+            <ProvidersDataContainer 
+            contacts={contacts} 
+            providers={provider} 
+            deleteFunction={handleDelete} 
+            editFunction={handleEditProvider}
+            />
         </div>
     )
 }

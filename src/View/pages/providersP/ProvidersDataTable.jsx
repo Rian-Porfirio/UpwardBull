@@ -2,7 +2,7 @@ import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import DataTable from "react-data-table-component";
 
-export default function ProvidersDataContainer({providers = [], deleteFunction, editFunction}){
+export default function ProvidersDataContainer({providers = [], deleteFunction, editFunction, contacts = []}){
 
     const columns = [
         {
@@ -11,19 +11,19 @@ export default function ProvidersDataContainer({providers = [], deleteFunction, 
         },
         {
             name: "City",
-            selector: row => row.email
+            selector: row => row.city
         },
         {
             name: "State",
-            selector: row => row.phone
+            selector: row => row.state
         },
         {
             name: "Country",
-            selector: row => row.provider
+            selector: row => row.country
         },
         {
             name: "Contacts",
-            selector: row => row.provider
+            selector: row => row.contacts
         },
         {
             name: "Actions",
@@ -41,7 +41,8 @@ export default function ProvidersDataContainer({providers = [], deleteFunction, 
         name: p.name,
         city: p.city,
         state: p.state,
-        country: p.country
+        country: p.country,
+        contacts: contacts.length
     }));
 
     return (
@@ -49,10 +50,9 @@ export default function ProvidersDataContainer({providers = [], deleteFunction, 
             <DataTable 
                 data={data}
                 dense 
-                title="View"
                 striped
                 columns={columns}
-                className="h-52"
+                className="2xl:h-96 xl:h-64 sm:h-[200px]"
                 responsive
                 pagination
                 fixedHeader

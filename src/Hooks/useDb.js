@@ -5,6 +5,7 @@ import {
   deleteDoc,
   getDocs,
   addDoc,
+  getDoc,
   doc,
 } from "firebase/firestore";
 
@@ -13,6 +14,7 @@ export function useDb() {
     db,
     doc,
     addDoc,
+    getDoc,
     getDocs,
     deleteDoc,
     updateDoc,

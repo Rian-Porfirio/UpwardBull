@@ -1,52 +1,52 @@
-import { listContacts, addContact, deleteContact, editContact } from "../../../model/services/data/ContactsData";
-import { listProviders } from "../../../model/services/data/ProvidersData";
-import ContactsDataContainer from "./ContactsDataTable";
-import ContactsLayout from "./ContactsLayout";
 import { useState, useEffect } from "react";
+import ContactsDataContainer from "./ContactsDataTable";
+import { listProviders, listProviderContacts, addProviderContact, deleteProviderContact, editProviderContact  } from "../../../model/services/data/ProvidersData";
+import ContactsLayout from "./ContactsLayout";
 
 export default function ContactsPage(){
 
-    const [Contact, setContact] = useState([])
+    const [contact, setContact] = useState([])
     const [provider, setProvider] = useState([])
     const [editItem, setEditItem] = useState(null)
     const [isEditing, setIsEditing] = useState(false)
+    const [currentProvider, setCurrentProvider] = useState()
 
-    async function handleAdd(Contact){
-        await addContact(Contact)
-    }
-    
     async function handleListProviders(){
         let providers = await listProviders();
         setProvider(providers)
     }
-    
-    async function handleList(){
-        let Contacts = await listContacts();
-        setContact(Contacts)
-    }
-    
-    async function handleDelete(id){
-        await deleteContact(id);
-    }
-    
-    async function handleEdit(newContact){
-        const id = editItem.id;
-        await editContact(id, newContact)
-    }
-    
-    const handleEditContact = (Contact) =>{
-        setEditItem(Contact)
-        setIsEditing(true);
-    }
-    
+
     useEffect(() =>{
         handleListProviders()
     }, [])
 
+    async function handleAdd(providerId, contact){
+        await addProviderContact(providerId, contact)
+    }
+    
+    async function handleList(providerId){
+        let contacts = await listProviderContacts(providerId);
+        setContact(contacts)
+    }
+    
+    async function handleDelete(contactId){
+        await deleteProviderContact(currentProvider, contactId);
+    }
+    
+    async function handleEdit(newContact){
+        const id = editItem.id;
+        await editProviderContact(currentProvider, id, newContact)
+    }
+    
+    const handleEditContact = (contact) =>{
+        setEditItem(contact)
+        setIsEditing(true);
+    }
+
     return (
         <div className="bg-neutral-500 w-full p-3 flex flex-col gap-3">
-            <ContactsLayout addItem={handleAdd} listItem={handleList} editItem={handleEdit} contact={editItem} providers={provider} editing={isEditing} setEditing={setIsEditing}/>
-            <ContactsDataContainer contacts={Contact} deleteFunction={handleDelete} editContact={handleEditContact}/>
+            <ContactsLayout addItem={handleAdd} listItem={handleList} editItem={handleEdit} contact={editItem} providers={provider} editing={isEditing} setEditing={setIsEditing} setCurrentProvider={setCurrentProvider}/>
+            <ContactsDataContainer contacts={contact} deleteFunction={handleDelete} editFunction={handleEditContact}/>
         </div>
     )
 }

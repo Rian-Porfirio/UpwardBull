@@ -1,7 +1,6 @@
 import {Sidebar, Menu, MenuItem} from "react-pro-sidebar"
 import { RiContactsBook3Fill } from "react-icons/ri";
 import { AiFillProduct } from "react-icons/ai";
-import { IoAnalytics } from "react-icons/io5";
 import { FaBuilding } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 import { FaHouse } from "react-icons/fa6";
@@ -30,7 +29,6 @@ export default function SidebarLayout(){
                 <MenuItem icon={<FaHouse />} component={<Link to="/" />}>Home</MenuItem>
                 <MenuItem icon={<AiFillProduct />} component={<Link to="products" />}>Products</MenuItem>
                 <MenuItem icon={<RiContactsBook3Fill />} component={<Link to="contacts" />}>Contacts</MenuItem>
-                <MenuItem icon={<IoAnalytics />} component={<Link to="cotations" />}>Cotations</MenuItem>
                 <MenuItem icon={<FaBuilding />} component={<Link to="providers" />}>Providers</MenuItem>
             </Menu>
         </Sidebar>

@@ -1,14 +1,21 @@
 import {useState, useEffect} from "react"
-import InputCrud from "../../components/InputCrud"
+import InputCrud from "../../components/InputCrud";
 
-export default function ContactsLayout({addItem, listItem, editItem, contact, editing, setEditing, providers = []}){
+export default function ContactsLayout({addItem, listItem, editItem, contact, editing, setEditing, providers = [], setCurrentProvider}){
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
+    const [providersMap, setProvidersMap] = useState([])
+    const [selectedProvider, setSelectedProvider] = useState("default");
 
     const handleRegister = () =>{
         if(name && email && phone){
-            addItem({
+            const providerId = providersMap[selectedProvider]
+            if(!providerId){
+                alert("Provider not selected or not found");
+                return;
+            }
+            addItem(providerId, {
                 name: name,
                 email: email,
                 phone: phone
@@ -56,20 +63,43 @@ export default function ContactsLayout({addItem, listItem, editItem, contact, ed
         }
     }, [contact])
 
-    useEffect(() =>{
-        listItem()
-    }, [handleRegister, handleEdit])
+    useEffect(() => {
+        const map = {};
+        providers.forEach(provider => {
+          map[provider.name] = provider.id;
+        });
+        setProvidersMap(map);
+      }, [providers]);
+
+      useEffect(() => {
+        handleListProvidersContacts(selectedProvider)
+      }, [handleEdit, handleRegister])
+
+      const handleListProvidersContacts = (providerName) => {
+        const providerId = providersMap[providerName];
+        setCurrentProvider(providerId)
+        if (providerId) {
+          listItem(providerId);
+        }
+    }
+
 
     return (
         <div className="h-fit bg-white rounded-lg p-4 text-black">
                 <div className="h-full">
                     <div className="text-xs flex flex-col gap-2">
-                        <div className="flex justify-end items-center">
+                        <div className="flex flex-col justify-end">
+                                    <div className="grid grid-cols-3 gap-3">
+                                        <InputCrud name="Name" value={name} change={(n) => setName(n.target.value)} />
+                                        <InputCrud name="Email" value={email} change={(e) => setEmail(e.target.value)}/>
+                                        <InputCrud name="Phone" value={phone} change={(p) => setPhone(p.target.value)}/>
+                                    </div>
                                 <div className="w-full">
                                     <h2 className="mb-1">Provider</h2>
-                                    <select className="select bg-neutral-200 w-full max-w-xs select-xs" defaultValue="Select the provider">
+                                    <select className="select bg-neutral-200 w-full max-w-xs select-xs" onChange={(event) => setSelectedProvider(event.target.value)} value={selectedProvider}>
+                                    <option value="default" hidden>Select the provider</option>
                                     {providers.map( p => {
-                                        return <option>{p.name}</option>
+                                        return <option key={p.id}>{p.name}</option>
                                     })}
                                     </select>
                                 </div>

@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 export default function MainScreen(){
     return(
-        <div className="flex">
+        <div className="flex h-screen">
             <Sidebar />
             <Outlet />
         </div>

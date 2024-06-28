@@ -1,28 +1,37 @@
 import {useState, useEffect} from "react"
-import InputCrud from "../../components/InputCrud"
+import InputCrud from "../../components/InputCrud";
 
-export default function ProductsLayout({selectForm = false, addItem, listItem, editItem, product, editing, setEditing}){
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
+export default function ProductsLayout({addItem, listItem, listProviders, editItem, editing, product, setEditing, providers = []}){
+    const [name, setName] = useState("")
+    const [date, setDate] = useState("")
+    const [price, setPrice] = useState("")
+    const [currency, setCurrency] = useState("default")
+    const [selectedProvider, setSelectedProvider] = useState("default")
 
     const handleRegister = () =>{
-        if(name && email && phone){
+        if(isNaN(price)){
+            alert("Price is not a number")
+            return;
+        }
+
+        if(name && date && selectedProvider && currency){
             addItem({
                 name: name,
-                email: email,
-                phone: phone
+                date: date,
+                currency: currency,
+                price: price,
+                provider: selectedProvider,
             })
             return;
         }
-        
         alert("Action Blocked. Please provide the information below.")
     }
 
     const handleClean = () => {
         setName("")
-        setEmail("")
-        setPhone("")
+        setPrice("")
+        setDate("")
+        setSelectedProvider("default")
     }
 
     const handleCancel = () =>{
@@ -31,14 +40,16 @@ export default function ProductsLayout({selectForm = false, addItem, listItem, e
     }
     
     const handleEdit = () =>{
-        if(!name || !email || !phone){
+        if(!price && !selectedProvider && !name && !date){
             alert("Action Blocked. Please provide the information below.")
             return;
         }
         editItem({
             name: name,
-            email: email,
-            phone: phone
+            date: date,
+            currency: currency,
+            price: price,
+            provider: selectedProvider,
         })
         handleClean();
         setEditing(false)
@@ -46,8 +57,10 @@ export default function ProductsLayout({selectForm = false, addItem, listItem, e
 
     const handleInputs = () =>{
         setName(product.name)
-        setEmail(product.email)
-        setPhone(product.phone)
+        setPrice(product.cotation)
+        setCurrency(product.currency)
+        setDate(product.date)
+        setSelectedProvider(product.provider)
     }
 
     useEffect(()=>{
@@ -56,31 +69,50 @@ export default function ProductsLayout({selectForm = false, addItem, listItem, e
         }
     }, [product])
 
-    useEffect(() =>{
-        listItem()
-    }, [handleRegister, handleEdit])
+      useEffect(() => {
+            listItem()
+            listProviders()
+      }, [editItem, handleRegister])
+
 
     return (
         <div className="h-fit bg-white rounded-lg p-4 text-black">
                 <div className="h-full">
                     <div className="text-xs flex flex-col gap-2">
-                        <InputCrud name="Name" value={name} change={(n) => setName(n.target.value)} />
-                        <InputCrud name="Email" value={email} change={(e) => setEmail(e.target.value)}/>
-                        <InputCrud name="Phone" value={phone} change={(p) => setPhone(p.target.value)}/>
-                        <div className="flex justify-end items-center">
-                        {selectForm && (
-                                <div className="w-full">
-                                    <h2 className="mb-1">Provider</h2>
-                                    <select className="select bg-neutral-200 w-full max-w-xs select-xs" defaultValue="Select the provider">
-                                    <option>Pick the best JS framework</option>
-                                    <option>dsadawdak</option>
-                                    <option>dwadasd</option>
-                                    <option>dawdasd</option>
-                                    </select>
-                                </div>
-                            )}
-
-                            <div className="flex gap-10 self-end">
+                        <div className="flex flex-col justify-end">
+                                    <div className="grid grid-cols-3 gap-2">
+                                            <InputCrud name="Product" value={name} change={(n) => setName(n.target.value)} />
+                                            <div className="flex gap-3 w-21">
+                                                <InputCrud name="Price" value={price} change={(p) => setPrice(p.target.value)} />
+                                                <InputCrud name="Date" value={date} type="date" change={(d) => setDate(d.target.value)} />
+                                                </div>
+                                                <div className="w-24">
+                                                        <h2 className="mb-1">Currency</h2>
+                                                        <select className="select bg-neutral-200 w-full max-w-xs select-xs" onChange={(event) => setCurrency(event.target.value)} value={currency}>
+                                                        <option value="default" hidden></option>
+                                                        <option>R$</option>
+                                                        <option>$</option>
+                                                        <option>€</option>
+                                                        <option>£</option>
+                                                        <option>¥</option>
+                                                        <option>AU$</option>
+                                                        <option>C$</option>
+                                                        <option>元</option>
+                                                        <option>AR$</option>
+                                                        <option>₺</option>
+                                                        </select>
+                                            </div>
+                                                <div>
+                                                    <h2 className="mb-1">Provider</h2>
+                                                    <select className="select bg-neutral-200 w-full max-w-xs select-xs" onChange={(event) => setSelectedProvider(event.target.value)} value={selectedProvider}>
+                                                    <option value="default" hidden>Select the provider</option>
+                                                    {providers.map( p => {
+                                                        return <option key={p.id}>{p.name}</option>
+                                                    })}
+                                                    </select>
+                                                </div>
+                                    </div>
+                            <div className="flex gap-10 self-end mt-3">
                                 {
                                 editing 
                                 ? 

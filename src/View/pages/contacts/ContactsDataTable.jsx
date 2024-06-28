@@ -18,10 +18,6 @@ export default function ContactsDataTable({contacts = [], deleteFunction, editFu
             selector: row => row.phone
         },
         {
-            name: "Provider",
-            selector: row => row.provider
-        },
-        {
             name: "Actions",
             cell: (row) =>(
                 <div className="flex gap-3">
@@ -37,7 +33,6 @@ export default function ContactsDataTable({contacts = [], deleteFunction, editFu
         name: p.name,
         email: p.email,
         phone: p.phone,
-        provider: p.provider
     }));
 
     return (
@@ -48,7 +43,7 @@ export default function ContactsDataTable({contacts = [], deleteFunction, editFu
                 title="View"
                 striped
                 columns={columns}
-                className="h-52"
+                className="2xl:h-96 xl:h-64 sm:h-[200px]"
                 responsive
                 pagination
                 fixedHeader
