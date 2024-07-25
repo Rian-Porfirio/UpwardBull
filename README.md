@@ -28,7 +28,7 @@ UpwardBull é um sistema de compras para todas as empresas, desenvolvido com Rea
     VITE_FIREBASE_APP_ID
 
     
-3. para executar o sistema.
+3. Para executar o sistema.
    ```sh
    npm run dev
 
