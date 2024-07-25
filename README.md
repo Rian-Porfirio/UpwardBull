@@ -39,7 +39,7 @@ UpwardBull é um sistema de compras para todas as empresas, desenvolvido com Rea
 
 ## Aba de contatos
 ![image](https://github.com/user-attachments/assets/2fe0c74e-50f9-4780-b1b1-5956d61a5cb7)
-Selecione o fornecedor que deseja para visualizar seus contatos registrador
+Selecione o fornecedor que deseja para visualizar seus contatos registrados
 
 ## Aba de fornecedores
 ![image](https://github.com/user-attachments/assets/2107f923-b15a-41c0-88db-761c5a9160c1)
