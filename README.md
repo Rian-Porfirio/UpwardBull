@@ -18,7 +18,7 @@ UpwardBull é um sistema de compras para todas as empresas, desenvolvido com Rea
 1. Clone o repositório:
    ```sh
    git clone https://github.com/Rian-Porfirio/UpwardBull.git
-2- Crie um arquivo .env para adicionar as variáveis de ambiente que serão utilizadas para o consumo dos serviços do firebase.
+2. Crie um arquivo .env para adicionar as variáveis de ambiente que serão utilizadas para o consumo dos serviços do firebase.
    ```sh
     VITE_FIREBASE_API_KEY
     VITE_FIREBASE_AUTH_DOMAIN
