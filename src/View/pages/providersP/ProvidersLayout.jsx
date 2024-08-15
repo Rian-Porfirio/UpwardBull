@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react"
+import { getFlag } from "../../../model/services/flags/CountryFlags";
 import InputCrud from "../../components/InputCrud"
 
 export default function ProvidersLayout({selectForm = false, addItem, listItem, editItem, provider, editing, setEditing}){
@@ -8,13 +9,14 @@ export default function ProvidersLayout({selectForm = false, addItem, listItem, 
     const [state, setState] = useState("");
     const [country, setCountry] = useState("");
 
-    const handleRegister = () =>{
+    const handleRegister = async () =>{
         if(name && city && state && country){
+            const flagImage = await getFlag(country.toLowerCase()).then(c => c[0].flags.png);
             addItem({
                 name: name,
                 city: city,
                 state: state,
-                country: country,
+                country: flagImage
             })
             return;
         }
@@ -34,17 +36,18 @@ export default function ProvidersLayout({selectForm = false, addItem, listItem, 
         setEditing(false)
     }
     
-    const handleEdit = () =>{
+    const handleEdit = async () =>{
         if(!city || !state || !country){
             alert("Action Blocked. Please provide the information below.")
             return;
         }
+        const flagImage = await getFlag(country.toLowerCase()).then(c => c[0].flags.png);
         editItem({
             name: name,
             city: city,
             state: state,
-            country: country,
-        })
+            country: flagImage
+        });
         handleClean();
         setEditing(false)
     }

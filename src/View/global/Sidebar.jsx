@@ -1,3 +1,4 @@
+import { IoIosHelpCircleOutline } from "react-icons/io";
 import {Sidebar, Menu, MenuItem} from "react-pro-sidebar"
 import { RiContactsBook3Fill } from "react-icons/ri";
 import { AiFillProduct } from "react-icons/ai";
@@ -12,7 +13,10 @@ export default function SidebarLayout(){
             <div className="text-center mb-5">
                 <div className="flex items-center justify-between p-4">
                     <h1>Gerente</h1>
-                    <button onClick={() => alert("Not implemented")}>{<MdLogout />}</button>
+                    <div className="flex gap-3">
+                        <Link to="/info"><IoIosHelpCircleOutline style={{width:18, height:18}} title="Info"/></Link>
+                        <button onClick={() => alert("Not implemented")}>{<MdLogout title="Logout"/>}</button>
+                    </div>
                 </div>
                 <div className="avatar">
                     <div className="w-24 rounded-full mb-3">

@@ -1,6 +1,7 @@
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import DataTable from "react-data-table-component";
+import Icon from "../../components/FlagIcon";
 
 export default function ProvidersDataContainer({providers = [], deleteFunction, editFunction, contacts = []}){
 
@@ -19,7 +20,9 @@ export default function ProvidersDataContainer({providers = [], deleteFunction, 
         },
         {
             name: "Country",
-            selector: row => row.country
+            cell: (row) =>(
+                <Icon url={row.country} />
+            )
         },
         {
             name: "Contacts",

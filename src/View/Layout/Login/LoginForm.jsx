@@ -32,7 +32,7 @@ export default function LoginForm(){
     async function handleLogin(e){
         e.preventDefault();
         showError("");
-        const response = await userLogin(emailText, password);
+       const response = await userLogin(emailText, password);
 
         if(response.error){
             showError(response.error);
