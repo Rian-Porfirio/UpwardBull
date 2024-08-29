@@ -21,6 +21,7 @@ export default function ProvidersPage(){
 
     async function handleDelete(id){
         await deleteProvider(id);
+        handleList()
     }
 
     async function handleEdit(newProvider){

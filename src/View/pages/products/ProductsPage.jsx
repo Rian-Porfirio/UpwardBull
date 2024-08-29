@@ -27,6 +27,7 @@ export default function ProductsPage(){
 
     async function handleDelete(id){
         await deleteProduct(id);
+        handleList();
     }
 
     async function handleEdit(newProduct){
@@ -34,22 +35,21 @@ export default function ProductsPage(){
         await editProduct(id, newProduct)
     }
     
-    const handleEditProduct = (product) =>{
-        setEditItem(product)
+    const handleEditProduct = (product) => {
+        setEditItem(product);
         setIsEditing(true);
     }
 
     return (
         <div className="bg-neutral-500 w-full p-3 flex flex-col gap-3">
-            <ProductsLayout 
-            addItem={handleAdd} 
-            listItem={handleList} 
-            listProviders={handleListProviders} 
-            editItem={handleEdit} 
-            product={editItem} 
-            editing={isEditing} 
-            setEditing={setIsEditing} 
-            products={product} 
+            <ProductsLayout
+            addItem={handleAdd}
+            listItem={handleList}
+            listProviders={handleListProviders}
+            editItem={handleEdit}
+            product={editItem}
+            editing={isEditing}
+            setEditing={setIsEditing}
             providers={provider}
             />
 
