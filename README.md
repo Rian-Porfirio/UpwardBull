@@ -4,65 +4,72 @@ video da apresentação: https://drive.google.com/file/d/1jAmMFVBXxwbGEZoRDQeOST
 
 complemento: https://drive.google.com/file/d/1dQllwaCT4u7BjktwVcC26JGjhaPY-S_O/view?usp=drive_link
 
-## Novas Funcionalidades
+## UpwardBull - Sistema de Compras
+UpwardBull é um sistema de gestão de compras, projetado para fornecer um controle eficiente e seguro sobre as requisições, cotações e fornecedores. O sistema é acessível tanto para usuários regulares quanto para administradores, garantindo que apenas o solicitante tenha acesso às suas requisições, enquanto os administradores podem ver e gerenciar todas as requisições.
 
-### 1. Transformação de Nomes de Países em Bandeiras
+## Funcionalidades Principais
+1. Autenticação de Usuário:
 
-Agora, os nomes dos países são automaticamente convertidos em suas respectivas bandeiras utilizando uma API. Isso melhora a visualização e a compreensão dos dados relacionados a países no sistema.
-![Exemplo de Bandeiras](https://github.com/user-attachments/assets/18c96c0b-defd-49cc-a688-6b9590f27087)
+- Tela de Login: Verificação de e-mail e senha para acesso seguro.
 
-### 2. Novo Botão "Info"
+- ![image](https://github.com/user-attachments/assets/939de855-a922-4e5e-9bd4-5f192716736e)
+- ![image](https://github.com/user-attachments/assets/b8599d47-7fcc-40dc-aaf1-97c52bb8a535)
 
-Adicionado um botão "Info" que direciona os usuários para uma página informacional sobre o sistema. Esta página fornece detalhes úteis e instruções sobre como utilizar as funcionalidades do sistema.
+- Tela de Registro: Novo usuário pode se registrar para acessar o sistema.
+- ![image](https://github.com/user-attachments/assets/e5ded3f1-d5b7-4821-8abc-51fd3bcd65e9)
 
-![Botão Info](https://github.com/user-attachments/assets/526b470c-216e-46ee-912b-58a2be48b3a6)
-![Página Informacional](https://github.com/user-attachments/assets/4c6cbb6b-c868-47de-b974-0a7827aaed3c)
+2. Gestão de Requisições:
 
-## Backlog do Sistema
+- Cadastro de Requisições e Cotações: Usuários podem cadastrar requisições e cotações, mas apenas o criador pode ver suas requisições. Administradores têm visão completa sobre todas as requisições.
+- ![image](https://github.com/user-attachments/assets/7261b929-1c53-4492-9654-8fd53c422066)
+- ![image](https://github.com/user-attachments/assets/80616a94-698d-480c-888b-657288891542)
+- ![image](https://github.com/user-attachments/assets/72e9ecce-4ca7-4c5d-8006-965d59b52142)
 
-### 1. Refatoração
+3. Cotações:
 
-#### Refatorar Código do Sistema
+- Modal de Cotações: Interface para visualização e inserção de cotações associadas a uma requisição. Usuários podem acessar detalhes e adicionar informações sobre cotações.
+- ![image](https://github.com/user-attachments/assets/617981da-15a4-4d52-988d-88d5ca651eef)
 
-**Descrição:** Melhorar a estrutura e a legibilidade do código atual para aumentar a manutenibilidade e a eficiência.
+- ![image](https://github.com/user-attachments/assets/3f60d408-9491-4533-a3d9-f248bd74ff4a)
 
-- Revisar e limpar o código redundante.
-- Atualizar a documentação do código.
+4. Gestão de Produtos:
 
-### 2. Teste
+- Tela de Produtos: Gerenciamento de todos os produtos relacionados às requisições e cotações. Fornece uma visão completa dos produtos disponíveis no sistema.
+- ![image](https://github.com/user-attachments/assets/7ffd7573-ec3c-46a5-b41f-3ab688bbc6a1)
 
-#### Testar Funcionalidades Existentes
+5. Gestão de Fornecedores:
 
-**Descrição:** Garantir que todas as funcionalidades atuais do sistema estejam funcionando conforme o esperado.
+- Cadastro de Fornecedores: Sistema integrado a uma API que busca automaticamente a bandeira de país com base no nome do fornecedor. Facilita a inserção de novos fornecedores no sistema.
+- ![image](https://github.com/user-attachments/assets/e96e2c61-61ba-4215-a7f5-6c64f56e8808)
 
-- Criar e executar testes unitários.
-- Realizar testes de integração.
-- Corrigir bugs encontrados durante os testes.
+6. Gestão de Usuários:
 
-### 3. Correção de Consultas no Firebase
+- Funções de Administrador: Administradores têm controle sobre os usuários do sistema, com a capacidade de bloquear usuários ou promover usuários regulares a administradores.
+- ![image](https://github.com/user-attachments/assets/c6849a06-7d27-4715-af79-a0fd6f424a64)
 
-#### Corrigir Consultas Ineficientes no Firebase
+- ![image](https://github.com/user-attachments/assets/5166a38d-10cd-4b75-ac1f-935436250af8)
 
-**Descrição:** Revisar e otimizar as consultas no Firebase para melhorar o desempenho e a precisão dos dados retornados.
+# Tecnologias Utilizadas
+### Frontend:
 
-- Identificar consultas problemáticas e pontos de estrangulamento.
-- Implementar melhorias, como regras de segurança otimizadas e consultas mais eficientes.
-- Testar e validar a correção das consultas.
+- React.js
+- Vite.js (para desenvolvimento rápido e otimizado)
+- React Toastify (para notificações)
 
-### 4. Novas Funcionalidades
+### Backend e Autenticação:
+- Firebase (para autenticação e banco de dados)
+  
+### Integrações:
 
-#### Adicionar Funcionalidade de Relatórios Personalizados
+- API para buscar bandeira de país de fornecedores
+- Sistema de autenticação
+- Regras de Acesso
 
-**Descrição:** Permitir que os usuários gerem relatórios personalizados com base em diferentes critérios (por exemplo, período, categoria, etc.).
+### Usuários Regulares:
+- Podem cadastrar requisições e cotações.
+- Têm acesso apenas às suas próprias requisições.
+  
+### Administradores:
 
-- Implementar interface de criação de relatórios.
-- Integrar com o Firebase para coleta de dados.
-- Desenvolver opções de exportação (PDF, Excel).
-
-#### Implementar Notificações em Tempo Real
-
-**Descrição:** Adicionar um sistema de notificações em tempo real para alertar os usuários sobre eventos importantes.
-
-- Configurar sistema de notificações.
-- Desenvolver interface para exibição das notificações.
-- Implementar lógica de notificação em tempo real para eventos críticos.
+- Têm visibilidade completa sobre todas as requisições e cotações.
+- Podem gerenciar usuários, fornecedores e produtos.
