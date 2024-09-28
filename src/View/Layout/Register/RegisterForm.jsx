@@ -5,6 +5,7 @@ import { useState } from "react";
 import InputForm from "../login/InputForm";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function RegisterForm() {
   const [emailText, setEmailText] = useState("");
@@ -27,22 +28,27 @@ export default function RegisterForm() {
 
   async function handleRegister(e) {
     e.preventDefault();
-    showError("");
+    showError(""); 
 
     if (password !== confirmPassword) {
-      showError("Passwords doesn`t match");
+      showError("Passwords do not match");
       return;
     }
 
-    const response = await userRegister(emailText, password);
-
-    if (response.error) {
-      showError(response.error);
-      return;
+    try {
+      const response = await userRegister(emailText, password);
+      if (response.error) {
+        showError(response.error);
+        return;
+      }
+    
+      toast.success("Successfully Registered");
+      navigate("/login");
+    } catch (error) {
+      
+      showError("An error occurred during registration. Please try again.");
+      toast.error("An error occurred during registration.");
     }
-
-    alert("Succesfully Registered");
-    navigate("login")
   }
 
   return (
@@ -50,7 +56,7 @@ export default function RegisterForm() {
       <div className="h-full p-12">
         <div className="flex flex-col h-full p-1">
           <div className="mx-auto">
-            <img src={"/images/UpwardBullLogo.png"} />
+            <img src={"/images/UpwardBullLogo.png"} alt="Upward Bull Logo" />
           </div>
           <div className="h-full">
             <form>
@@ -62,21 +68,21 @@ export default function RegisterForm() {
               />
               <InputForm
                 value={password}
-                name="password"
+                name="Password"
                 type="password"
-                instruction="type your password"
+                instruction="Type your password"
                 onChange={(p) => setPassword(p.target.value)}
               />
               <InputForm
                 value={confirmPassword}
-                name="confirm password"
+                name="Confirm Password"
                 type="password"
                 instruction="Confirm your password"
                 onChange={(p) => setConfirmPassword(p.target.value)}
               />
               {error && <p className="text-error text-sm pb-3">{error}</p>}
               <div className="flex gap-6 pt-6">
-                <Button action="Register" onClick={handleRegister} />
+                <Button action="Register" onClick={handleRegister} disabled={!isClickable} />
               </div>
             </form>
           </div>

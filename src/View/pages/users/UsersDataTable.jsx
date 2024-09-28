@@ -182,7 +182,7 @@ export default function UserDataContainer() {
           {
             when: (row) => row.id % 2 === 0,
             style: {
-              backgroundColor: "#f9f9f9", // Linhas pares com fundo cinza claro
+              backgroundColor: "#f9f9f9",
             },
           },
         ]}

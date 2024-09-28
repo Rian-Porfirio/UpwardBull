@@ -25,13 +25,16 @@ export async function getProvider(providerId) {
 }
 
 export async function addProviderContact(providerId, contact) {
-  const contactsCollecionRef = database.collection(
+  const contactsCollectionRef = database.collection(
     database.db,
     "providers",
     providerId,
     "contacts"
   );
-  await database.addDoc(contactsCollecionRef, contact);
+  await database.addDoc(contactsCollectionRef, {
+    ...contact,
+    isActive: true,
+  });
 }
 
 export async function listProviderContacts(providerId) {
@@ -64,7 +67,10 @@ export async function editProviderContact(providerId, contactId, newContact) {
     database.collection(database.db, "providers", providerId, "contacts"),
     contactId
   );
-  await database.updateDoc(docRef, newContact);
+  await database.updateDoc(docRef, {
+    ...newContact,
+    isActive: newContact.isActive !== undefined ? newContact.isActive : true,
+  });
 }
 
 export async function deleteProvider(providerId) {

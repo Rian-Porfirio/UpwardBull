@@ -10,10 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^2.1.8",
+    "@heroicons/react": "^2.1.5",
     "@hookform/resolvers": "^3.9.0",
     "daisyui": "^4.12.2",
     "firebase": "^10.12.2",
     "react": "^18.3.1",
+    "react-bootstrap": "^2.10.4",
+    "react-csv": "^2.2.2",
     "react-data-table-component": "^7.6.2",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",

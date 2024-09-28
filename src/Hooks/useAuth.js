@@ -3,7 +3,7 @@ import { auth } from "../config/FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { UsersData } from "../model/services/data/UsersData";
 
-export function useAuth() {
+export const useAuth = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -28,4 +28,4 @@ export function useAuth() {
   }, []);
 
   return { user };
-}
+};

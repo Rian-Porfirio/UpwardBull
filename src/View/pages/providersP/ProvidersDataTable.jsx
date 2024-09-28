@@ -1,54 +1,59 @@
-import { MdDelete } from "react-icons/md";
-import { MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 import DataTable from "react-data-table-component";
 import FlagIcon from "../../components/FlagIcon";
+import CsvExport from "../../components/CsvExport";
 
-export default function ProvidersDataContainer({providers = [], deleteFunction, editFunction, contacts = []}){
+export default function ProvidersDataContainer({ providers = [], deleteFunction, editFunction }) {
     const columns = [
         {
             name: "Name",
-            selector: row => row.name
+            selector: row => row.name,
         },
         {
             name: "City",
-            selector: row => row.city
+            selector: row => row.city,
         },
         {
             name: "State",
-            selector: row => row.state
+            selector: row => row.state,
         },
         {
             name: "Country",
-            cell: (row) =>(
+            cell: (row) => (
                 <FlagIcon url={row.country} />
-            )
+            ),
         },
         {
-            name: "Contacts",
-            selector: row => row.contacts
+            name: "Document",
+            selector: row => row.document,
         },
         {
             name: "Actions",
-            cell: (row) =>(
+            cell: (row) => (
                 <div className="flex gap-3">
                     <button onClick={() => editFunction(row)}><MdEdit /></button>
                     <button onClick={() => deleteFunction(row.id)}><MdDelete /></button>
                 </div>
-            )
-        }
-    ]
+            ),
+        },
+    ];
 
     const data = providers.map(p => ({
         id: p.id,
         name: p.name,
         city: p.city,
+        document: p.document,
         state: p.state,
         country: p.country,
-        contacts: contacts.length
+        countryName: p.countryName,
     }));
 
     return (
-        <div className="h-full bg-white rounded-lg p-3">
+        <div className="h-full bg-white rounded-lg p-3 shadow-md overflow-auto">
+            <div className="flex justify-between mb-3">
+                <h1 className="text-lg font-bold">Providers</h1>
+                <CsvExport data={data} filename="providers.csv" />
+            </div>
             <DataTable 
                 data={data}
                 dense 
@@ -58,7 +63,7 @@ export default function ProvidersDataContainer({providers = [], deleteFunction, 
                 responsive
                 pagination
                 fixedHeader
-                />
+            />
         </div>
     );
 }
