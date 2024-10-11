@@ -32,11 +32,6 @@ UpwardBull é um sistema de gestão de compras, projetado para fornecer um contr
 
 - ![image](https://github.com/user-attachments/assets/3f60d408-9491-4533-a3d9-f248bd74ff4a)
 
-4. Gestão de Produtos:
-
-- Tela de Produtos: Gerenciamento de todos os produtos relacionados às requisições e cotações. Fornece uma visão completa dos produtos disponíveis no sistema.
-- ![image](https://github.com/user-attachments/assets/7ffd7573-ec3c-46a5-b41f-3ab688bbc6a1)
-
 5. Gestão de Fornecedores:
 
 - Cadastro de Fornecedores: Sistema integrado a uma API que busca automaticamente a bandeira de país com base no nome do fornecedor. Facilita a inserção de novos fornecedores no sistema.
